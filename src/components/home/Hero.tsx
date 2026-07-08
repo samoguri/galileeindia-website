@@ -1,4 +1,5 @@
 import hero from "../../assets/hero.png";
+import { Link } from "react-router-dom";
 
 function Hero() {
   return (
@@ -80,19 +81,21 @@ function Hero() {
             Matthew 4:19
           </p>
 
-          <button
-            style={{
-              background: "#FFD54F",
-              color: "#0B3D91",
-              padding: "15px 35px",
-              border: "none",
-              borderRadius: "8px",
-              fontWeight: "bold",
-              cursor: "pointer",
-            }}
-          >
-            ▶ Watch Sermons
-          </button>
+<Link
+  to="/sermons"
+  style={{
+    display: "inline-block",
+    background: "#FFD54F",
+    color: "#0B3D91",
+    padding: "15px 35px",
+    borderRadius: "8px",
+    fontWeight: "bold",
+    textDecoration: "none",
+    cursor: "pointer",
+  }}
+>
+  ▶ Watch Sermons
+</Link>
         </div>
       </div>
     </section>

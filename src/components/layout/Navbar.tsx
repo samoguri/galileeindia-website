@@ -1,5 +1,6 @@
 import { Menu, Play } from "lucide-react";
-import logo from "../../assets/logo.png"; 
+import { Link } from "react-router-dom";
+import logo from "../../assets/logo.png";
 
 function Navbar() {
   return (
@@ -28,21 +29,40 @@ function Navbar() {
 
           {/* Desktop Menu */}
           <nav className="hidden lg:flex items-center gap-8 font-medium text-gray-700">
-            <a href="#" className="hover:text-blue-700">Home</a>
-            <a href="#" className="hover:text-blue-700">About</a>
-            <a href="#" className="hover:text-blue-700">Ministries</a>
-            <a href="#" className="hover:text-blue-700">Sermons</a>
-            <a href="#" className="hover:text-blue-700">Events</a>
-            <a href="#" className="hover:text-blue-700">Contact</a>
+
+            <Link to="/" className="hover:text-blue-700">
+              Home
+            </Link>
+
+            <Link to="/about" className="hover:text-blue-700">
+              About
+            </Link>
+
+            <Link to="/ministries" className="hover:text-blue-700">
+              Ministries
+            </Link>
+
+            <Link to="/sermons" className="hover:text-blue-700">
+              Sermons
+            </Link>
+
+            <Link   to="/events"   className="hover:text-blue-700" >   Events </Link>
+            <Link   to="/pastors"   className="hover:text-blue-700" >   Our Pastors </Link>
+
+            <Link   to="/contact"   className="hover:text-blue-700" >   Contact </Link>
+
           </nav>
 
           {/* Right Side */}
           <div className="flex items-center gap-4">
 
-            <button className="hidden md:flex items-center gap-2 bg-blue-900 hover:bg-blue-800 text-white px-5 py-3 rounded-lg transition">
+            <Link
+              to="/sermons"
+              className="hidden md:flex items-center gap-2 bg-blue-900 hover:bg-blue-800 text-white px-5 py-3 rounded-lg transition"
+            >
               <Play size={18} />
               Watch Sermons
-            </button>
+            </Link>
 
             <button className="lg:hidden">
               <Menu size={28} />
