@@ -1,6 +1,6 @@
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
-import pastors from "../assets/pastors.png";
+import pastors from "../assets/pastors.jpg";
 
 function Pastors() {
   return (
@@ -46,20 +46,20 @@ function Pastors() {
             </h2>
 
             <p className="text-lg text-gray-500 mt-2">
-              Lead Pastors
+              Pastors
             </p>
 
           </div>
 
           {/* Biography */}
 
-          <div className="bg-white rounded-2xl shadow-lg p-10 mt-12">
+          <div className="bg-white rounded-2xl shadow-lg p-10 mt-12 text-center">
 
             <h2 className="text-3xl font-bold text-blue-900 mb-8">
               Our Story
             </h2>
 
-            <div className="space-y-6 text-gray-700 leading-8">
+            <div className="space-y-6 text-gray-700 leading-8 text-center">
 
               <p>
                 After serving for over <strong>25 years in senior leadership roles in the corporate world</strong>, we responded to God's call to full-time ministry. We believe that every season of our lives was part of His preparation for serving His Kingdom.

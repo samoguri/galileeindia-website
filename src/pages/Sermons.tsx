@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
 import { getVideos } from "../services/youtube";
@@ -6,6 +6,8 @@ import { getVideos } from "../services/youtube";
 function Sermons() {
   const [videos, setVideos] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [nowPlayingId, setNowPlayingId] = useState<string | null>(null);
+  const playerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     getVideos()
@@ -30,6 +32,13 @@ function Sermons() {
 
   const latest = videos[0];
   const previous = videos.slice(1);
+  const featured =
+    videos.find((video) => video.id.videoId === nowPlayingId) ?? latest;
+
+  function playVideo(videoId: string) {
+    setNowPlayingId(videoId);
+    playerRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
 
   return (
     <>
@@ -48,24 +57,34 @@ function Sermons() {
 
           {/* Featured Sermon */}
 
-          {latest && (
-            <div className="bg-white rounded-3xl shadow-xl overflow-hidden mb-20">
+          {featured && (
+            <div
+              ref={playerRef}
+              className="bg-white rounded-3xl shadow-xl overflow-hidden mb-20"
+            >
 
-              <img
-                src={latest.snippet.thumbnails.high.url}
-                alt={latest.snippet.title}
-                className="w-full max-h-[500px] object-cover"
-              />
+              <div className="aspect-video w-full bg-black">
+                <iframe
+                  key={featured.id.videoId}
+                  className="w-full h-full"
+                  src={`https://www.youtube.com/embed/${featured.id.videoId}${
+                    nowPlayingId ? "?autoplay=1" : ""
+                  }`}
+                  title={featured.snippet.title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
 
               <div className="p-10">
 
                 <h2 className="text-4xl font-bold text-blue-900 mb-4">
-                  {latest.snippet.title}
+                  {featured.snippet.title}
                 </h2>
 
-                <p className="text-gray-500 mb-8">
+                <p className="text-gray-500">
                   Published on{" "}
-                  {new Date(latest.snippet.publishedAt).toLocaleDateString(
+                  {new Date(featured.snippet.publishedAt).toLocaleDateString(
                     "en-IN",
                     {
                       day: "numeric",
@@ -74,15 +93,6 @@ function Sermons() {
                     }
                   )}
                 </p>
-
-                <a
-                  href={`https://www.youtube.com/watch?v=${latest.id.videoId}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-block bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-xl font-semibold transition"
-                >
-                  ▶ Watch on YouTube
-                </a>
 
               </div>
 
@@ -99,9 +109,14 @@ function Sermons() {
 
             {previous.map((video) => (
 
-              <div
+              <button
                 key={video.id.videoId}
-                className="bg-white rounded-2xl overflow-hidden shadow hover:shadow-xl transition duration-300"
+                onClick={() => playVideo(video.id.videoId)}
+                className={`text-left bg-white rounded-2xl overflow-hidden shadow hover:shadow-xl transition duration-300 ${
+                  video.id.videoId === nowPlayingId
+                    ? "ring-2 ring-blue-900"
+                    : ""
+                }`}
               >
 
                 <img
@@ -127,18 +142,13 @@ function Sermons() {
                     )}
                   </p>
 
-                  <a
-                    href={`https://www.youtube.com/watch?v=${video.id.videoId}`}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-red-600 font-semibold hover:underline"
-                  >
+                  <span className="text-red-600 font-semibold">
                     ▶ Watch Sermon
-                  </a>
+                  </span>
 
                 </div>
 
-              </div>
+              </button>
 
             ))}
 

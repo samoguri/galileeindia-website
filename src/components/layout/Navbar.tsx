@@ -1,19 +1,34 @@
-import { Menu, Play } from "lucide-react";
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 
+const NAV_LINKS = [
+  { to: "/", label: "Home" },
+  { to: "/about", label: "About" },
+  { to: "/ministries", label: "Ministries" },
+  { to: "/sermons", label: "Sermons" },
+  { to: "/events", label: "Events" },
+  { to: "/pastors", label: "Our Pastors" },
+  { to: "/contact", label: "Contact" },
+  { to: "/join-us", label: "Join Us" },
+  { to: "/admin", label: "View Requests" },
+];
+
 function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-gray-200 shadow-sm">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-28">
 
           {/* Logo */}
           <div className="flex items-center gap-4">
             <img
               src={logo}
               alt="Galilee Prayer Fellowship"
-              className="w-16 h-16 rounded-full object-cover border border-gray-200"
+              className="w-24 h-24 rounded-full object-cover border border-gray-200"
             />
 
             <div>
@@ -29,48 +44,44 @@ function Navbar() {
 
           {/* Desktop Menu */}
           <nav className="hidden lg:flex items-center gap-8 font-medium text-gray-700">
-
-            <Link to="/" className="hover:text-blue-700">
-              Home
-            </Link>
-
-            <Link to="/about" className="hover:text-blue-700">
-              About
-            </Link>
-
-            <Link to="/ministries" className="hover:text-blue-700">
-              Ministries
-            </Link>
-
-            <Link to="/sermons" className="hover:text-blue-700">
-              Sermons
-            </Link>
-
-            <Link   to="/events"   className="hover:text-blue-700" >   Events </Link>
-            <Link   to="/pastors"   className="hover:text-blue-700" >   Our Pastors </Link>
-
-            <Link   to="/contact"   className="hover:text-blue-700" >   Contact </Link>
-
+            {NAV_LINKS.map((link) => (
+              <Link key={link.to} to={link.to} className="hover:text-blue-700">
+                {link.label}
+              </Link>
+            ))}
           </nav>
 
           {/* Right Side */}
           <div className="flex items-center gap-4">
 
-            <Link
-              to="/sermons"
-              className="hidden md:flex items-center gap-2 bg-blue-900 hover:bg-blue-800 text-white px-5 py-3 rounded-lg transition"
+            <button
+              className="lg:hidden"
+              onClick={() => setMenuOpen((open) => !open)}
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={menuOpen}
             >
-              <Play size={18} />
-              Watch Sermons
-            </Link>
-
-            <button className="lg:hidden">
-              <Menu size={28} />
+              {menuOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
 
           </div>
 
         </div>
+
+        {/* Mobile Menu */}
+        {menuOpen && (
+          <nav className="lg:hidden flex flex-col gap-1 pb-6 font-medium text-gray-700">
+            {NAV_LINKS.map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                className="py-3 px-2 rounded-lg hover:bg-blue-50 hover:text-blue-700"
+                onClick={() => setMenuOpen(false)}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+        )}
       </div>
     </header>
   );
