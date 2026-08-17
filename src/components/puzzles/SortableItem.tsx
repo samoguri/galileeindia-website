@@ -21,8 +21,6 @@ function SortableItem({ id, label, onTap, index }: Props) {
     <div
       ref={setNodeRef}
       style={style}
-      role="button"
-      tabIndex={0}
       onClick={onTap}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
