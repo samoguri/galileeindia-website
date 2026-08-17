@@ -21,6 +21,7 @@ function EventsPage() {
           <Events />
 
         </div>
+
       </section>
 
       <Footer />

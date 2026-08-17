@@ -18,7 +18,7 @@ function Ministries() {
             Worship, prayer, Bible teaching, and serving our community.
           </p>
 
-          <ServiceTimes />
+          <ServiceTimes layout="list" />
 
         </div>
       </section>

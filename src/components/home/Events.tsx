@@ -1,24 +1,9 @@
-function Events() {
-  const events = [
-    { date: "01 Jan 2026", event: "New Year Service" },
-    { date: "26 Jan 2026", event: "Special Prayer Meeting" },
-    { date: "01 Apr 2026", event: "Fasting Prayers" },
-    { date: "02 Apr 2026", event: "Fasting Prayers" },
-    { date: "03 Apr 2026", event: "Good Friday Service" },
-    { date: "04 Apr 2026", event: "Fasting Service" },
-    { date: "05 Apr 2026", event: "Easter Service" },
-    {
-      date: "18 Apr 2026",
-      event:
-        "Celebration of our Founding Pastor – 3rd Death Anniversary",
-    },
-    { date: "24 May 2026", event: "Special Sunday Service" },
-    { date: "13 Jun 2026", event: "One Day Bible Conference" },
-  ];
+import { CHURCH_EVENTS } from "../../data/events";
 
+function Events() {
   return (
     <section className="py-10">
-      <div className="overflow-hidden rounded-xl shadow-lg bg-white">
+      <div className="overflow-hidden rounded-xl shadow-lg bg-white dark:bg-gray-800">
 
         <table className="w-full">
 
@@ -33,18 +18,18 @@ function Events() {
 
           <tbody>
 
-            {events.map((item, index) => (
+            {CHURCH_EVENTS.map((item, index) => (
 
               <tr
                 key={index}
-                className="border-b hover:bg-blue-50 transition"
+                className="border-b border-gray-200 dark:border-gray-700 hover:bg-blue-50 dark:hover:bg-gray-700 transition"
               >
 
-                <td className="px-6 py-4 text-center font-semibold">
+                <td className="px-6 py-4 text-center font-semibold text-gray-900 dark:text-gray-100">
                   {item.date}
                 </td>
 
-                <td className="px-6 py-4 text-center">
+                <td className="px-6 py-4 text-center text-gray-800 dark:text-gray-300">
                   {item.event}
                 </td>
 

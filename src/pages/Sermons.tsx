@@ -76,7 +76,7 @@ function Sermons() {
                 />
               </div>
 
-              <div className="p-10">
+              <div className="p-10 text-center">
 
                 <h2 className="text-4xl font-bold text-blue-900 mb-4">
                   {featured.snippet.title}
@@ -101,7 +101,7 @@ function Sermons() {
 
           {/* Previous Sermons */}
 
-          <h2 className="text-3xl font-bold text-blue-900 mb-10">
+          <h2 className="text-3xl font-bold text-blue-900 mb-10 text-center">
             Previous Sermons
           </h2>
 

@@ -9,6 +9,9 @@ import Pastors from "./pages/Pastors";
 import Contact from "./pages/Contact";
 import JoinUs from "./pages/JoinUs";   // <-- This line must exist
 import Admin from "./pages/Admin";
+import BiblePuzzles from "./pages/BiblePuzzles";
+import BiblePuzzlePlay from "./pages/BiblePuzzlePlay";
+import BiblePuzzleLeaderboard from "./pages/BiblePuzzleLeaderboard";
 
 function App() {
   return (
@@ -23,6 +26,9 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/join-us" element={<JoinUs />} />   {/* <-- This route */}
         <Route path="/admin" element={<Admin />} />
+        <Route path="/bible-puzzle" element={<BiblePuzzles />} />
+        <Route path="/bible-puzzle/:id" element={<BiblePuzzlePlay />} />
+        <Route path="/bible-puzzle/:id/leaderboard" element={<BiblePuzzleLeaderboard />} />
       </Routes>
     </BrowserRouter>
   );
